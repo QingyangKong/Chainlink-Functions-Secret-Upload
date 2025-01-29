@@ -46,7 +46,15 @@ const encryptAndUploadSecrets = async () => {
   console.log(`\n✅Gist created ${gistURL} . Encrypt the URLs..`);
   const encryptedSecretsUrls = await secretsManager.encryptSecretsUrls([gistURL]);
 
-  console.log(`\n✅Secrets encrypted. URLs: ${encryptedSecretsUrls}`);
+  console.log(`\n✅Secrets encrypted. Encrypted URLs: ${encryptedSecretsUrls}`);
+
+  // Write the encrypted secrets URL to a local file
+  const fs = require("fs");
+  const path = require("path");
+
+  const filePath = path.join(__dirname, "encryptedSecretsUrls.txt");
+  fs.writeFileSync(filePath, JSON.stringify(encryptedSecretsUrls, null, 2));
+  console.log(`\n✅Encrypted secrets URLs written to ${filePath}`);
 };
 
 encryptAndUploadSecrets().catch(e => {
