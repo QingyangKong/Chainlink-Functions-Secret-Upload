@@ -53,7 +53,7 @@ const encryptAndUploadSecrets = async () => {
   const path = require("path");
 
   const filePath = path.join(__dirname, "encryptedSecretsUrls.txt");
-  fs.writeFileSync(filePath, JSON.stringify(encryptedSecretsUrls, null, 2));
+  fs.writeFileSync(filePath, JSON.stringify({ encryptedSecretsUrls, gistURL }, null, 2));
   console.log(`\n✅Encrypted secrets URLs written to ${filePath}`);
 };
 
