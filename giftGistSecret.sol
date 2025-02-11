@@ -3,14 +3,18 @@ pragma solidity ^0.8.19;
 
 import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/FunctionsClient.sol";
 import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/libraries/FunctionsRequest.sol";
-import {ERC721} from "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC721/ERC721.sol";
-import {ERC721URIStorage} from "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 /**
  * THIS IS AN EXAMPLE CONTRACT THAT USES HARDCODED VALUES FOR CLARITY.
  * THIS IS AN EXAMPLE CONTRACT THAT USES UN-AUDITED CODE.
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
+
+// run command below to compile the contract: 
+// solc --optimize --combined-json abi,bin --include-path ./node_modules --base-path . ./giftGistSecret.sol > GetGift.json
+
 contract GetGift is FunctionsClient, ERC721URIStorage {
     using FunctionsRequest for FunctionsRequest.Request;
 
@@ -79,12 +83,11 @@ contract GetGift is FunctionsClient, ERC721URIStorage {
 
     /**
      * @notice Send a simple request
+     * @param encryptedSecretsUrls Encrypted URLs where to fetch user secrets
      * @param subscriptionId Billing ID
      */
     function sendRequest(
-        // bytes memory encryptedSecretsUrls,
-        uint8 donHostedSecretsSlotID,
-        uint64 donHostedSecretsVersion,
+        bytes memory encryptedSecretsUrls,
         string[] memory args,
         uint64 subscriptionId,
         address userAddr
@@ -96,13 +99,8 @@ contract GetGift is FunctionsClient, ERC721URIStorage {
         // send the Chainlink Functions request
         FunctionsRequest.Request memory req;
         req.initializeRequestForInlineJavaScript(SOURCE);
-        // if (encryptedSecretsUrls.length > 0)
-        //     req.addSecretsReference(encryptedSecretsUrls);
-        if (donHostedSecretsVersion > 0) 
-            req.addDONHostedSecrets(
-                donHostedSecretsSlotID,
-                donHostedSecretsVersion
-            );
+        if (encryptedSecretsUrls.length > 0)
+            req.addSecretsReference(encryptedSecretsUrls);
         if (args.length > 0) req.setArgs(args);
         s_lastRequestId = _sendRequest(
             req.encodeCBOR(),
