@@ -13,7 +13,7 @@ const makeRequestSepolia = async () => {
     "https://02.functions-gateway.testnet.chain.link/",
   ];
   const slotIdNumber = 0;
-  const expirationTimeMinutes = 60;
+  const expirationTimeMinutes = 1440;
 
   const secrets = { apikey: process.env.SUPABASE_API_KEY };
 
