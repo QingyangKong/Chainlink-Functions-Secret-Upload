@@ -59,6 +59,7 @@ const makeRequestSepolia = async () => {
 
   const donHostedSecretsVersion = parseInt(uploadResult.version); // fetch the reference of the encrypted secrets
 
+  // Save info in case we clear console
   fs.writeFileSync(
     "donSecretsInfo.txt",
     JSON.stringify(
