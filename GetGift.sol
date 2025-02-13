@@ -57,7 +57,7 @@ contract GetGift is FunctionsClient, ERC721URIStorage {
         "if(!secrets.apikey) { throw Error(\"Error: Supabase API Key is not set!\") };"
         "const apikey = secrets.apikey;"
         "const apiResponse = await Functions.makeHttpRequest({"
-            "url: \"https://hetiqdhzuhgeedeqdmmb.supabase.co/rest/v1/Gifts?select=gift_name,gift_code\","
+            "url: \"https://kwddfdscnuiglezwvble.supabase.co/rest/v1/Gifts?select=gift_name,gift_code\","
             "method: \"GET\","
             "headers: { \"apikey\": apikey,}"
         "});"
