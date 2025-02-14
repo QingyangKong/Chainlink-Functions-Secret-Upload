@@ -12,8 +12,8 @@ import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/
  * DO NOT USE THIS CODE IN PRODUCTION.
  */
 
-// run command below to compile the contract: 
-// solc --optimize --combined-json abi,bin --include-path ./node_modules --base-path . ./GetGift.sol > GetGift.json
+// run command below to generate ABI and BIN for this contract: 
+// solc --optimize --combined-json abi,bin --include-path ./node_modules --base-path . ./GiftDonSecret.sol > GetGift.json
 
 contract GetGift is FunctionsClient, ERC721URIStorage {
     using FunctionsRequest for FunctionsRequest.Request;
