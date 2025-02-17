@@ -1,6 +1,7 @@
 const { SecretsManager } = require("@chainlink/functions-toolkit");
 const ethers = require("ethers");
-require("@chainlink/env-enc").config();
+require('dotenv').config();
+
 const fs = require("fs");
 const makeRequestSepolia = async () => {
   // hardcoded for Avalanche Fuji
