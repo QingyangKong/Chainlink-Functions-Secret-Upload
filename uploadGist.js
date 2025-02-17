@@ -3,7 +3,7 @@ const {
   createGist,
 } = require("@chainlink/functions-toolkit");
 const ethers = require("ethers");
-require("@chainlink/env-enc").config();
+require('dotenv').config();
 
 const makeRequestSepolia = async () => {
   // hardcoded for Avalanche Fuji
